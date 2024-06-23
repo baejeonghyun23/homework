@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HomeWork Page</title>
+</head>
+<body>
+    
+    <input id="home_work_value" type="text" placeholder="값을 입력하세요">
+    <button onclick="addItem()">추가</button>
+    <button onclick="getItem()">불러오기</button>
+    <label id="latest_value"></label>
+
+
+    <script>
+        async function addItem() {
+            const value = document.getElementById("home_work_value").value;
+            const response = await fetch('/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ home_work_value: value })
+            });
+            const result = await response.json();
+            alert(result.message || result.detail);
+        }
+
+        async function getItem() {
+            const response = await fetch('/get');
+            const result = await response.json();
+            document.getElementById("latest_value").innerText = "가장 최근에 입력된 값: " + (result.home_work_value || result.detail);
+        }
+    </script>
+</body>
+</html>

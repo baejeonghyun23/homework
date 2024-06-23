@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  fastapi:
+    build: .
+    image: homework
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app:/code/app
+    depends_on:  #db먼저 실행
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: homework
+      MYSQL_USER: jeonghyun
+      MYSQL_PASSWORD: 1234
+    ports:
+      - 3306:3306

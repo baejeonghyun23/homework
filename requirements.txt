@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pydantic #데이터 유효성 검사 및 설정 관리
+sqlalchemy # 데이터베이스 상호작용
+pymysql # MySQL 연결
+cryptography # 암호화 기능 제공
