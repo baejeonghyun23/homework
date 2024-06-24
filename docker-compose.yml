@@ -9,15 +9,19 @@ services:
       - 8080:8080
     volumes:
       - ./app:/code/app
-    depends_on:  #db먼저 실행
+    depends_on:  # db먼저 실행
       - db
+    env_file:
+      - .env  # 환경 변수 파일 추가
 
   db:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: homework
-      MYSQL_USER: jeonghyun
-      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 3306:3306
+    env_file:
+      - .env  # 환경 변수 파일 추가
